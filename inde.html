@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasu</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js" defer></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" defer></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.js" defer></script>
+    <link href="https://api.fontshare.com/v2/ css?f[]=alpino@400&f[]=zodiak@900&display =swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+        .Alpino{
+          font-family: 'Alpino', sans-serif;
+        }
+        .Zodiak{
+          font-family: 'Zodiak', serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-200 relative overflow-x-hidden" x-data="{ open: false }">
+  <!-- header -->
+  <header class="sticky top-0 w-screen flex justify-between items-center py-1 px-4" >
+    <h1 class="z-30 text-4xl opacity-50 Zodiak" >Hyasu</h1>
+    <ion-icon class="z-30 lg:hidden text-2xl" @click="open = !open" :name="open ? 'close-outline' : 'menu-outline'"></ion-icon>
+    <nav class="z-20 absolute w-screen h-screen top-0 left-0 flex justify-center items-center bg-green-300 origin-right transform scale-x-0 transition-transform duration-300 sm:scale-x-100 sm:h-full sm:justify-end" :class="{ 'scale-x-100': open }" x-data="{ arr: ['home', 'products', 'about', 'contact'] }">
+      <ul class="flex flex-col sm:flex-row justify-between items-center sm:w-6/12">
+        <template x-for="(teks, index) in arr" :key="index">
+          <li class="capitalize py-6 text-3xl Zodiak">
+            <a :href="'#' + teks" class="flex justify-between items-center overflow-hidden" @click="open = !open">
+              <template x-for="(letter,index) in teks.split('')">
+                <h1 x-text="letter" :class="{'animate__animated animate__fadeInUp animate__delay-2s animate-faster' : open}" :style="`--animate-delay: calc(.04s * ${index});`"></h1>
+              </template>
+            </a>
+          </li>
+         </template>
+      </ul>
+    </nav>
+  </header>
+  
+  <!-- back to top botton -->
+  <a href="#home" :class="{ 'opacity-0': open }">
+    <ion-icon name="chevron-up-outline" class="fixed bottom-8 right-8 bg-blue-300 p-2 rounded text-xl opacity-75 active:bg-red-700"></ion-icon>
+  </a>
+<div 
+  class="p-20 flex flex-col justify-center items-center gap-5"
+  x-data="{ 
+    counter(par, target) { 
+      const dur = setInterval(() => { 
+        target.value++; 
+        if (target.value === par) clearInterval(dur); 
+      }, 100);
+    }
+  }"
+>
+    <div x-data="{ value: 0 }" x-init="counter(80, $data)" x-text="value"></div>
+    <div x-data="{ value: 0 }" x-init="counter(25, $data)" x-text="value"></div>
+    <div x-data="{ value: 0 }" x-init="counter(50, $data)" x-text="value"></div>
+</div>
+
+
+  <!-- home section -->
+  <section id="home" class="w-screen h-screen flex justify-center items-center bg-green-300">
+    <img class="" src="https://images.unsplash.com/photo-1591133177103-3aa67f051e1a?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+  </section>
+  <section id="about" class="w-screen h-screen flex justify-center items-center bg-green-300">
+    this home
+  </section>
+  <section id="products" class="w-screen h-screen flex justify-center items-center bg-green-300">
+    this home
+  </section>
+  <section id="contact" class="w-screen h-screen flex justify-center items-center bg-green-300" >
+    <h1 class="text-3xl" x-data="{ teks : 'The low gok'}">
+      <template x-for="letter in teks.split('')">
+        <span x-text="letter" class="bg-red-600 mr-1"></span>
+      </template>
+    </h1>
+  </section>
+   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+</html>
